@@ -37,16 +37,7 @@ meter.
 | There is a Lion at position 2865  |
 | There is a Zombie at position 3523|
 
-| *Sample Output 1*                          |
-| :---                                       |
-| Hero started journey with 1000 HP!         |
-| Hero defeated Bug with 990 HP remaining    |
-| Hero defeated Bug with 980 HP remaining    |
-| Hero defeated Lion with 830 HP remaining   |
-| Hero defeated Zombie with 620 HP remaining |
-| Hero defeated Lion with 470 HP remaining   |
-| Hero defeated Zombie with 260 HP remaining |
-| Hero Survived!                             |
+![Sample Output 1](images/fileinput1_output.PNG/)
 
 | *Sample Input 2*                           |
 | :---                                       |
@@ -67,11 +58,5 @@ meter.
 | There is a ZombieDog at position 486       |
 | There is a ZombieDog at position 1897      |
 | There is a Mutant at position 5332         |
-  
-| *Sample Output 2*                           |
-| :---                                        |
-| Hero started journey with 500 HP!           |
-| Hero defeated Mutant with 140 HP remaining  |
-| Hero defeated ZombieDog with 50 HP remaining|
-| Zombie defeated Hero with 228 HP remaining  |
-| Hero is Dead!! Last seen at position 1687!! |
+
+![Sample Output 2](images/fileinput2_output.PNG/)

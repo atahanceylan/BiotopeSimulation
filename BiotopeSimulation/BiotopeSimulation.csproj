@@ -10,7 +10,6 @@
   <ItemGroup>
     <None Remove="SampleInputs\sampleInput1.txt" />
     <None Remove="SampleInputs\sampleInput2.txt" />
-    <None Remove="SampleInputs\sampleinput3.txt" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,14 +19,18 @@
     <EmbeddedResource Include="SampleInputs\sampleInput2.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="SampleInputs\sampleinput3.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Serilog.Sinks.Console" Version="4.1.0" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

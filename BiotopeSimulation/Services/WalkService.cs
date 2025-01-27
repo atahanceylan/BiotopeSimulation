@@ -6,25 +6,28 @@ namespace HeroWillSurviveOrNot.Services
     {
         public void Walk(BunkerBiotope bunkerBiotope)
         {
-            int currentPosition = bunkerBiotope.Enemies.First().Position;
-            while (currentPosition < bunkerBiotope.Resource.Position)
+            if (bunkerBiotope.Enemies.Count > 0)
             {
-                Enemy? currentEnemy = bunkerBiotope.Enemies.Find(x => x.Position == currentPosition);
-                if (currentEnemy != null)
+                int currentPosition = bunkerBiotope.Enemies.First().Position;
+                while (currentPosition < bunkerBiotope.Resource.Position)
                 {
-                    bunkerBiotope.Hero.Position = currentPosition;
-                    bool isEnemyDead = bunkerBiotope.Hero.Fight(currentEnemy);
-                    if (isEnemyDead)
+                    Enemy? currentEnemy = bunkerBiotope.Enemies.Find(x => x.Position == currentPosition);
+                    if (currentEnemy != null)
                     {
-                        bunkerBiotope.Enemies.Remove(currentEnemy);
+                        bunkerBiotope.Hero.Position = currentPosition;
+                        bool isEnemyDead = bunkerBiotope.Hero.Fight(currentEnemy);
+                        if (isEnemyDead)
+                        {
+                            bunkerBiotope.Enemies.Remove(currentEnemy);
+                        }
+                        else
+                        {
+                            break;
+                        }
                     }
-                    else
-                    {
-                        break;
-                    }
+                    currentPosition = bunkerBiotope.Enemies.Any() ? bunkerBiotope.Enemies.First().Position : bunkerBiotope.Resource.Position;
                 }
-                currentPosition = bunkerBiotope.Enemies.Any() ? bunkerBiotope.Enemies.First().Position : bunkerBiotope.Resource.Position;
             }            
-        }
+        }        
     }
 }

@@ -2,6 +2,7 @@
 using HeroWillSurviveOrNot.Species;
 using Serilog;
 using System.Configuration;
+using System.Reflection;
 
 namespace HeroWillSurviveOrNot;
 
@@ -9,7 +10,11 @@ public static class Program
 {
     private static void Main(string[] args)
     {
-        string? filePath = ConfigurationManager.AppSettings["InputFilePath"];
+        string fileName = ConfigurationManager.AppSettings["InputFileName1"];
+        string assemblyPath = Assembly.GetExecutingAssembly().Location;
+        string assemblyDirectory = Path.GetDirectoryName(assemblyPath);
+        string filePath = Path.Combine(assemblyDirectory, "SampleInputs", fileName);
+
         Log.Logger = new LoggerConfiguration()
                     .WriteTo.Console()
                     .MinimumLevel.Debug()

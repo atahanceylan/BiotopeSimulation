@@ -1,6 +1,5 @@
 ﻿using HeroWillSurviveOrNot.Species;
 using Serilog;
-using Serilog.Core;
 
 namespace HeroWillSurviveOrNot.Services
 {
@@ -59,13 +58,24 @@ namespace HeroWillSurviveOrNot.Services
                 if (line.Contains(enemyTypeList[i].Name + " has "))
                 {
                     string[] lineElements = line.Split(' ');
-                    enemyTypeList[i].HitPower = Convert.ToInt32(lineElements[2]);
+                    if (lineElements.Length > 2)
+                    {
+                        var isNumeric = int.TryParse(lineElements[2], out int val);
+                        if (isNumeric)
+                            enemyTypeList[i].HitPower = val;                        
+                    }
+                        
                 }
 
                 if (line.Contains(enemyTypeList[i].Name + " attack "))
                 {
                     string[] lineElements = line.Split(' ');
-                    enemyTypeList[i].AttackPower = Convert.ToInt32(lineElements[3]);
+                    if (lineElements.Length > 3)
+                    {
+                        var isNumeric = int.TryParse(lineElements[3], out int val);
+                        if (isNumeric)
+                            enemyTypeList[i].AttackPower = val;                        
+                    }
                 }
             }
         }
@@ -73,8 +83,11 @@ namespace HeroWillSurviveOrNot.Services
         private void AddEnemyToEnemyTypeList(List<Enemy> enemyTypeList, string line)
         {
             string[] lineElements = line.Split(' ');
-            Enemy enemy = new Enemy(lineElements[0]);
-            enemyTypeList.Add(enemy);
+            if (lineElements.Length > 1)
+            {
+                Enemy enemy = new Enemy(lineElements[0]);
+                enemyTypeList.Add(enemy);
+            }
         }
 
         private bool CheckEnemyType(string line)
@@ -82,10 +95,17 @@ namespace HeroWillSurviveOrNot.Services
             return line.Contains("is Enemy");
         }
 
+
         private void SetHeroAttackPower(Hero hero, string line)
         {
             string[] lineElements = line.Split(' ');
-            hero.AttackPower = Convert.ToInt32(lineElements[3]);
+            if (lineElements.Length > 3)
+            {
+                var isNumeric = int.TryParse(lineElements[3], out int val);
+                if (isNumeric)
+                    hero.AttackPower = val;
+            }
+
         }
 
         private bool CheckHeroAttackPower(string line)
@@ -96,7 +116,12 @@ namespace HeroWillSurviveOrNot.Services
         private void SetHeroHitPower(Hero hero, string line)
         {
             string[] lineElements = line.Split(' ');
-            hero.HitPower = Convert.ToInt32(lineElements[2]);
+            if (lineElements.Length > 2)
+            {
+                var isNumeric = int.TryParse(lineElements[2], out int val);
+                if (isNumeric)
+                    hero.HitPower = val;
+            }
             Console.WriteLine($"Hero started journey with {hero.HitPower} HP!");
         }
 
@@ -108,7 +133,12 @@ namespace HeroWillSurviveOrNot.Services
         private void SetResource(Resource resource, string line)
         {
             string[] lineElements = line.Split(' ');
-            resource.Position = Convert.ToInt32(lineElements[2]);
+            if (lineElements.Length > 2)
+            {
+                var isNumeric = int.TryParse(lineElements[2], out int val);
+                if (isNumeric)
+                    resource.Position = val;
+            }
         }
 
         private bool CheckResource(string line)
@@ -125,15 +155,22 @@ namespace HeroWillSurviveOrNot.Services
                     if (line.Contains(enemyTypeList[i].Name))
                     {
                         string[] lineElements = line.Split(' ');
-                        Enemy enemy = new Enemy
-                        (
-                            enemyTypeList[i].HitPower,
-                            enemyTypeList[i].AttackPower,
-                            Convert.ToInt32(lineElements[6]),
-                            enemyTypeList[i].Name
-                        );
-                        enemyList.Add(enemy);
-                        break;
+                        if (lineElements.Length > 6)
+                        {
+                            var isNumeric = int.TryParse(lineElements[6], out int val);
+                            if (isNumeric)
+                            {
+                                Enemy enemy = new Enemy
+                                (
+                                    enemyTypeList[i].HitPower,
+                                    enemyTypeList[i].AttackPower,
+                                    val,
+                                    enemyTypeList[i].Name
+                                );
+                                enemyList.Add(enemy);
+                                break;
+                            }
+                        }
                     }
                 }
             }
