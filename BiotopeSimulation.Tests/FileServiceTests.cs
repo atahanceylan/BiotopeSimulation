@@ -42,7 +42,7 @@ namespace BiotopeSimulation.Tests
             BunkerBiotope bunkerBiotope = fileService.ParseTextFileToObjects(inputFilePath!);
 
             //Assert
-            Assert.IsTrue(bunkerBiotope is not null);
+            Assert.That(bunkerBiotope is not null);
         }
 
         [Test]        

@@ -42,7 +42,7 @@ namespace BiotopeSimulation.Tests
             walkService.Walk(bunkerBiotope);
 
             //Assert
-            Assert.IsTrue(bunkerBiotope.Hero.IsHeroAlive);
+            Assert.That(bunkerBiotope.Hero.IsHeroAlive);
         }
 
         [Test]        
@@ -56,7 +56,7 @@ namespace BiotopeSimulation.Tests
             walkService.Walk(bunkerBiotope);
 
             //Assert
-            Assert.IsFalse(bunkerBiotope.Hero.IsHeroAlive);
+            Assert.That(bunkerBiotope.Hero.IsHeroAlive);
         }
     }
 }
