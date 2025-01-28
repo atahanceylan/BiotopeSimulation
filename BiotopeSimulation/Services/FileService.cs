@@ -45,7 +45,7 @@ namespace BiotopeSimulation.Services
                 }
                 catch (Exception ex)
                 {
-                    Log.Error(ex.StackTrace);
+                    Log.Error(ex, $"Exception occured details: {0}");
                     throw;
                 }
             }
