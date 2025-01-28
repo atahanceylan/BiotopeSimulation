@@ -1,44 +1,20 @@
-﻿using HeroWillSurviveOrNot.Species;
+﻿
+using BiotopeSimulation.Species;
 
-namespace HeroWillSurviveOrNot.Services
+namespace BiotopeSimulation.Services
 {
     public static class FightService
     {
         public static void Simulate(BunkerBiotope bunkerBiotope)
         {
-            HeroWalk(bunkerBiotope);
+            new WalkService().Walk(bunkerBiotope);
             IsHeroSurvived(bunkerBiotope.Enemies);
         }
-
-        private static void HeroWalk(BunkerBiotope bunkerBiotope)
-        {
-            int currentPosition = bunkerBiotope.Enemies.First().Position;
-            while (currentPosition < bunkerBiotope.Resource.Position)
-            {
-                Enemy? currentEnemy = bunkerBiotope.Enemies.Find(x => x.Position == currentPosition);
-                if (currentEnemy != null)
-                {
-                    bunkerBiotope.Hero.Position = currentPosition;
-                    bool isEnemyDead = bunkerBiotope.Hero.Fight(currentEnemy);
-                    if (isEnemyDead)
-                    {
-                        bunkerBiotope.Enemies.Remove(currentEnemy);
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
-                currentPosition = bunkerBiotope.Enemies.Any() ? bunkerBiotope.Enemies.First().Position : bunkerBiotope.Resource.Position;
-            }
-        }
-
+        
         private static void IsHeroSurvived(List<Enemy> enemies)
         {
-            if (!enemies.Any())
-            {
-                Console.WriteLine("Hero Survived!");
-            }
+            if (enemies.Any()) return;
+            Console.WriteLine("Hero Survived!");
         }
     }
 }

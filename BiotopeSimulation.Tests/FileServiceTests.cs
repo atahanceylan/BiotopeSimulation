@@ -1,6 +1,7 @@
-using HeroWillSurviveOrNot.Services;
-using HeroWillSurviveOrNot.Species;
+
 using System.Collections.Specialized;
+using BiotopeSimulation.Services;
+using BiotopeSimulation.Species;
 
 namespace BiotopeSimulation.Tests
 {
@@ -13,22 +14,22 @@ namespace BiotopeSimulation.Tests
         public void Setup()
         {
             fileService = new FileService();
+            var filePath = AppDomain.CurrentDomain.BaseDirectory;
             filePathList = new NameValueCollection
             {
                 {
                     "InputFilePath",
-                    @"C:\\repos\\BiotopeSimulation\\BiotopeSimulation\\SampleInputs\\sampleInput1.txt"
+                    @$"{filePath}\\SampleInputs\\sampleInput1.txt"
                 },
                 {
                     "InputFilePath2",
-                    @"C:\\repos\\BiotopeSimulation\\BiotopeSimulation\\SampleInputs\\sampleInput2.txt"
+                    @$"{filePath}\\SampleInputs\\sampleInput2.txt"
                 },
                 {
                     "InputFilePath3",
-                    @"C:\\repos\\BiotopeSimulation\\BiotopeSimulation\\SampleInputs\\sampleInput3.txt"
+                    @$"{filePath}\\SampleInputs\\sampleInput3.txt"
                 }
             };
-
         }      
 
         [Test]        
@@ -38,7 +39,7 @@ namespace BiotopeSimulation.Tests
             string? inputFilePath = filePathList["InputFilePath"];
 
             //Act
-            BunkerBiotope bunkerBiotope = fileService.Parse(inputFilePath!);
+            BunkerBiotope bunkerBiotope = fileService.ParseTextFileToObjects(inputFilePath!);
 
             //Assert
             Assert.IsTrue(bunkerBiotope is not null);
@@ -51,7 +52,7 @@ namespace BiotopeSimulation.Tests
             string? inputFilePath = filePathList["InputFilePath3"];
 
             //Act && Assert
-            Assert.Throws<IndexOutOfRangeException>(() => fileService.Parse(inputFilePath!));
+            Assert.Throws<Exception>(() => fileService.ParseTextFileToObjects(inputFilePath!));
         }
     }
 }

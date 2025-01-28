@@ -1,6 +1,7 @@
-﻿using HeroWillSurviveOrNot.Services;
-using HeroWillSurviveOrNot.Species;
+﻿
 using System.Collections.Specialized;
+using BiotopeSimulation.Services;
+using BiotopeSimulation.Species;
 
 namespace BiotopeSimulation.Tests
 {
@@ -15,15 +16,16 @@ namespace BiotopeSimulation.Tests
         {
             fileService = new FileService();
             walkService = new WalkService();
+            var filePath = AppDomain.CurrentDomain.BaseDirectory;
             filePathList = new NameValueCollection
             {
                 {
                     "InputFilePath",
-                    @"C:\\repos\\BiotopeSimulation\\BiotopeSimulation\\SampleInputs\\sampleInput1.txt"
+                    @$"{filePath}\\SampleInputs\\sampleInput1.txt"
                 },
                 {
                     "InputFilePath2",
-                    @"C:\\repos\\BiotopeSimulation\\BiotopeSimulation\\SampleInputs\\sampleInput2.txt"
+                    @$"{filePath}\\SampleInputs\\sampleInput2.txt"
                 }
             };
         }
@@ -34,7 +36,7 @@ namespace BiotopeSimulation.Tests
             //Arrange
             string? inputFilePath = filePathList["InputFilePath"];
 
-            BunkerBiotope bunkerBiotope = fileService.Parse(inputFilePath!);
+            BunkerBiotope bunkerBiotope = fileService.ParseTextFileToObjects(inputFilePath!);
 
             //Act
             walkService.Walk(bunkerBiotope);
@@ -48,7 +50,7 @@ namespace BiotopeSimulation.Tests
         {
             //Arrange            
             string? inputFilePath = filePathList["InputFilePath2"];
-            BunkerBiotope bunkerBiotope = fileService.Parse(inputFilePath!);
+            BunkerBiotope bunkerBiotope = fileService.ParseTextFileToObjects(inputFilePath!);
 
             //Act
             walkService.Walk(bunkerBiotope);

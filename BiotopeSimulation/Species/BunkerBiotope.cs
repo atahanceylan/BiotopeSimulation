@@ -1,4 +1,4 @@
-﻿namespace HeroWillSurviveOrNot.Species
+﻿namespace BiotopeSimulation.Species
 {
     public class BunkerBiotope
     {

@@ -1,6 +1,6 @@
-﻿using HeroWillSurviveOrNot.Species;
+﻿using BiotopeSimulation.Species;
 
-namespace HeroWillSurviveOrNot.Services
+namespace BiotopeSimulation.Services
 {
     public interface IFileService
     {
