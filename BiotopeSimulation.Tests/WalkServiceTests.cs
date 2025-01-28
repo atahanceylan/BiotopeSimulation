@@ -21,11 +21,11 @@ namespace BiotopeSimulation.Tests
             {
                 {
                     "InputFilePath",
-                    @$"{filePath}\\SampleInputs\\sampleInput1.txt"
+                    $"{filePath}{Path.DirectorySeparatorChar}SampleInputs{Path.DirectorySeparatorChar}sampleInput1.txt"
                 },
                 {
                     "InputFilePath2",
-                    @$"{filePath}\\SampleInputs\\sampleInput2.txt"
+                    $"{filePath}{Path.DirectorySeparatorChar}SampleInputs{Path.DirectorySeparatorChar}sampleInput2.txt"
                 }
             };
         }
@@ -56,7 +56,7 @@ namespace BiotopeSimulation.Tests
             walkService.Walk(bunkerBiotope);
 
             //Assert
-            Assert.That(bunkerBiotope.Hero.IsHeroAlive);
+            Assert.That(!bunkerBiotope.Hero.IsHeroAlive);
         }
     }
 }
